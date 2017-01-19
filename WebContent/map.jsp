@@ -19,7 +19,6 @@
       					<button onclick="togglePath()">Paths</button>
       					<button onclick="toggleHeatmap()">Points</button>
       					<button onclick="changeGradient()">List</button>
-      					<button onclick="changeOpacity()">Toggle Menu</button>
     				</div>
             	
                 <div id="canvas-map" style="height:100%"/>
