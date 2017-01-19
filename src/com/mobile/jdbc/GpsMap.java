@@ -1,5 +1,6 @@
 package com.mobile.jdbc;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,17 +32,28 @@ public class GpsMap {
 		startLng = locationData.get(0).longitude; 
 		if(startLng.equals("")||startLng==null)
 			startLng = "-111.891"; 
-		Long minUnix = 0L; 
-		Long maxUnix = 0L;
+		Long minUnix = locationData.get(0).getTime(); 
+		Long maxUnix = locationData.get(0).getTime();
+		String startDate = locationData.get(0).getHrDate(); 
+		String endDate =locationData.get(0).getHrDate(); 
 		for(LocationData lData : locationData){ 
-			minUnix = (minUnix<lData.getTime()) ? minUnix: lData.getTime();
-			maxUnix = (minUnix>lData.getTime()) ? maxUnix: lData.getTime();
+			if(lData.getTime()!=null){ 
+				if(lData.getTime()<minUnix){ 
+					startDate = lData.getHrDate(); 
+					minUnix = lData.getTime(); 
+				}
+				if(lData.getTime()>maxUnix){ 
+					endDate = lData.getHrDate(); 
+					maxUnix = lData.getTime(); 
+				}
+			}
 		}
-		Date startDate = new Date(minUnix);
-		Date endDate = new Date(maxUnix); 
+
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+		df.setTimeZone(TimeZone.getTimeZone("America/Denver"));
 		//TODO - Fix wrong date strings
-		dateStamp = startDate.toString() + " - " + endDate.toString(); 
-		logger.debug("Map data generated for: " + dateStamp + " starting at " + startLat.toString() + "," + startLng.toString()); 
+		dateStamp = startDate + " - " + endDate; 
+		logger.debug("Map data available for: " + dateStamp + " starting at " + startLat.toString() + "," + startLng.toString() + "\n Time range may be larger than available data"); 
 		JsBuilder jsBuild = new JsBuilder(gpsCoords); 
 		jsPoint = jsBuild.getJsPoint(); 
 		jsHeat = jsBuild.getJsHeat(); 

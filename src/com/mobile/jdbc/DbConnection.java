@@ -122,7 +122,9 @@ public class DbConnection {
 			sql = "SELECT * FROM GPS";
 			switch (time) {
 			case "today":
-				sql+=" WHERE id BETWEEN " + ((System.currentTimeMillis()/1000) - (60*60*24)) + " AND " + (System.currentTimeMillis()/1000) + ";";
+				long from = ((System.currentTimeMillis()/1000) - (60*60*24)) ; 
+				long to = (System.currentTimeMillis()/1000); 
+				sql+=" WHERE id BETWEEN " + from + " AND " + to + ";";
 				break;
 			case "yesterday":	
 				sql+=" WHERE id BETWEEN " + ((System.currentTimeMillis()/1000) - (60*60*24*2)) + " AND " + ((System.currentTimeMillis()/1000) - (60*60*24)) + ";";
@@ -141,8 +143,7 @@ public class DbConnection {
 			while(res.next()){
 				Object obj = res.getObject("id"); 
 				Long unixTime = ((Number)obj).longValue(); 
-				Date dateTime = new Date(unixTime); 
-				String hrTime = dateTime.toString(); 
+				String hrTime = res.getString("date");
 				String latitude = res.getString("latitude"); 
 				String longitude = res.getString("longitude");
 				String speed = res.getString("speed"); 
