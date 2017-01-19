@@ -1,4 +1,4 @@
-SELECT * FROM GPSCREATE TABLE `gps` (
+CREATE TABLE `gps` (
   `id` bigint(8) NOT NULL,
   `date` varchar(65) NOT NULL,
   `latitude` varchar(45) NOT NULL,
