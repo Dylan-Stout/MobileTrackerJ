@@ -1,2 +1,3 @@
 .classpath
 .settings/org.eclipse.wst.ws.service.policy.prefs
+/target/
