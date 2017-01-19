@@ -2,23 +2,47 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Palantir GPS </title>
-</head>
-<body>
-<div id="map"></div>
-    <script>
-      function initMap() {
-        var startCoord = {lat: "${map.startLat}", lng: "${map.startLng}"}; //lat: -25.363, lng: 131.044
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: startCoord
-        });
-
-      }
-	</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNuIYqeD6yWtm6IzFxN7cIjkdcStxaBz4&callback=initMap" async defer></script>
-
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNuIYqeD6yWtm6IzFxN7cIjkdcStxaBz4"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script> 
+        <title>${map.dateStamp}</title>
+    </head>
+    <body>
+        <div data-role="page" id="map-page">            
+            <div data-role="content" id="content">
+                <div id="canvas-map" style="height:100%"/>
+            </div>      
+            <style>
+                #content {
+                    padding: 0 !important; 
+                    position : absolute !important; 
+                    top : 0 !important; 
+                    right : 0 !important; 
+                    bottom : 5px !important;  
+                    left : 0 !important;     
+                }       
+            </style>            
+            <script type="text/javascript">         
+                $(document).on('pageshow', '#map-page', function(e, data) {
+                    var map, 
+                        myLocation = { 
+                            lat: 50, 
+                            lon: -80 
+                        }, 
+                        mapOptions = { 
+                            zoom: 12, 
+                            mapTypeId: google.maps.MapTypeId.PLAN, 
+                            center: new google.maps.LatLng(${map.startLat}, ${map.startLng}) 
+                        }; 
+                    $('#canvas-map').css("height", "100%").css("padding", "0px"); 
+                    map = new google.maps.Map(document.getElementById('canvas-map'), mapOptions); 
+					${map.js}  
+                }); 
+            </script>           
+        </div>
+    </body>
 </html>

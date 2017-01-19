@@ -24,7 +24,11 @@ public class GpsMap {
 	public GpsMap(List<LocationData> locationData, String time){ 
 		gpsCoords = locationData; 
 		startLat = locationData.get(0).latitude; 
+		if(startLat.equals("")||startLat == null)
+			startLat = "40.760";
 		startLng = locationData.get(0).longitude; 
+		if(startLng.equals("")||startLng==null)
+			startLng = "-111.891"; 
 		Long minUnix = 0L; 
 		Long maxUnix = 0L;
 		for(LocationData lData : locationData){ 
@@ -33,12 +37,12 @@ public class GpsMap {
 		}
 		Date startDate = new Date(minUnix);
 		Date endDate = new Date(maxUnix); 
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss z");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT-7"));
-		dateStamp = sdf.format(startDate) + " - " + sdf.format(endDate); 
+
+		dateStamp = startDate.toString() + " - " + endDate.toString(); 
 		logger.debug("Map data generated for: " + dateStamp + " starting at " + startLat.toString() + "," + startLng.toString()); 
 		JsBuilder jsBuild = new JsBuilder(gpsCoords); 
 		js = jsBuild.getJs(); 
+		logger.debug("Generated js:" + js);
 				
 	}
 
