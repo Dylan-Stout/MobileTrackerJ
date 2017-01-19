@@ -16,7 +16,9 @@ public class GpsMap {
 	final static Logger logger = Logger.getLogger(GpsMap.class);
 	
 	List<LocationData> gpsCoords = new ArrayList<LocationData>();
-	String js = new String(); 
+	String jsPoint = new String(); 
+	String jsHeat = new String(); 
+	String jsPath = new String(); 
 	String startLat = new String(); 
 	String startLng = new String(); 
 	String dateStamp = new String(); 
@@ -37,12 +39,14 @@ public class GpsMap {
 		}
 		Date startDate = new Date(minUnix);
 		Date endDate = new Date(maxUnix); 
-
+		//TODO - Fix wrong date strings
 		dateStamp = startDate.toString() + " - " + endDate.toString(); 
 		logger.debug("Map data generated for: " + dateStamp + " starting at " + startLat.toString() + "," + startLng.toString()); 
 		JsBuilder jsBuild = new JsBuilder(gpsCoords); 
-		js = jsBuild.getJs(); 
-		logger.debug("Generated js:" + js);
+		jsPoint = jsBuild.getJsPoint(); 
+		jsHeat = jsBuild.getJsHeat(); 
+		jsPath = jsBuild.getJsPath(); 
+		logger.debug("Generated js:" + jsPoint);
 				
 	}
 
@@ -78,13 +82,31 @@ public class GpsMap {
 		this.dateStamp = dateStamp;
 	}
 
-	public String getJs() {
-		return js;
+	public String getJsPoint() {
+		return jsPoint;
 	}
 
-	public void setJs(String js) {
-		this.js = js;
+	public void setJsPoint(String js) {
+		this.jsPoint = js;
 	}
+
+	public String getJsHeat() {
+		return jsHeat;
+	}
+
+	public void setJsHeat(String jsHeat) {
+		this.jsHeat = jsHeat;
+	}
+
+	public String getJsPath() {
+		return jsPath;
+	}
+
+	public void setJsPath(String jsPath) {
+		this.jsPath = jsPath;
+	}
+	
+	
 	
 	
 	
