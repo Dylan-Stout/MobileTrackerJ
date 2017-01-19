@@ -1,6 +1,9 @@
-CREATE TABLE LOCATION(
-ID BIGINT PRIMARY KEY NOT NULL, 
-LATITUDE VARCHAR(55) NOT NULL, 
-LONGITUDE VARCHAR(55) NOT NULL, 
-SPEED VARCHAR(55) NOT NULL
-)
+SELECT * FROM GPSCREATE TABLE `gps` (
+  `id` bigint(8) NOT NULL,
+  `date` varchar(65) NOT NULL,
+  `latitude` varchar(45) NOT NULL,
+  `longitude` varchar(45) NOT NULL,
+  `speed` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
