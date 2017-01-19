@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.NameValuePair;
+import org.apache.log4j.Logger;
 
-import com.mobile.jdbc.GpsConnection;
+import com.mobile.jdbc.DbConnection;
+import com.mobile.jdbc.LocationData;
 
 /**
  * Servlet implementation class GpsStore
@@ -26,6 +28,7 @@ import com.mobile.jdbc.GpsConnection;
 @WebServlet("/Gps")
 public class GpsStore extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(GpsStore.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,17 +39,17 @@ public class GpsStore extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Respond with coordinate list
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		GpsConnection gps = new GpsConnection(); 
-		String path = getServletContext().getRealPath("WEB-INF/../");
-		File file = new File(path);
-		String fullPath = file.getCanonicalPath();
-		response = gps.getAllCsv(request, response, fullPath);
-		
+		logger.debug("doGet on /Gps Servlet");
+		DbConnection gps = new DbConnection(request,response); 
+		List<LocationData> lData = gps.getAllList("today");
+		for(LocationData l : lData){ 
+			response.getWriter().println(l.getLatitude() + "," + l.getLongitude()); 
+			logger.debug(l.getLatitude() + "," + l.getLongitude());
+		}
 		
 	}
 
@@ -54,55 +57,36 @@ public class GpsStore extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		handleRequest(request,response);
-		List<NameValuePair> list = (List<NameValuePair>) request.getAttribute("locations");
-		Enumeration<String> enumParams = (Enumeration<String>) request.getParameterNames();
-		 StringBuffer jb = new StringBuffer();
-		  String line = null;
-		  try {
-		    BufferedReader reader = request.getReader();
-		    while ((line = reader.readLine()) != null)
-		      jb.append(line);
-		  } catch (Exception e) { /*report an error*/ }
-		  Object location_string = URLDecoder.decode(jb.toString());
-		  System.out.println(jb.toString());
-		System.out.println(enumParams);
-		
-		
-	}
-	
-	public void handleRequest(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
-		PrintWriter out = res.getWriter();
-		Date date = new Date(); 
-		//PrintWriter outFile = new PrintWriter("locations_" + date.toString().replaceAll(" ","_") + ".txt");
-		res.setContentType("text/plain");
-
-		Enumeration<String> parameterNames = req.getParameterNames();
+		Enumeration<String> parameterNames = request.getParameterNames();
 		ArrayList<String> locationData = new ArrayList<String>(); 
 
 		while (parameterNames.hasMoreElements()) {
 			String paramName = parameterNames.nextElement();
-			String[] paramValues = req.getParameterValues(paramName);
+			String[] paramValues = request.getParameterValues(paramName);
 			locationData.add(paramValues[0]);
 		}
 		
-		String[] singleEntry = new String[4];
+		String[] singleEntry = new String[5];
 		int numMessages = locationData.size()/4;
 		for(int i=0; i<numMessages;i+=4){
 			singleEntry[0]=locationData.get(i*4);
-			singleEntry[1]=locationData.get((i*4)+1);
-			singleEntry[2]=locationData.get((i*4)+2); 
-			singleEntry[3]=locationData.get((i*4)+3); 
-			GpsConnection gpsCon = new GpsConnection(); 
+			Long unixTime = Long.parseLong(singleEntry[0],10); 
+			singleEntry[0]=unixTime.toString(); 
+			Date time = new Date(unixTime); 
+			System.out.println(time.toString());
+			singleEntry[1]=time.toString(); 
+			singleEntry[2]=locationData.get((i*4)+1);
+			singleEntry[3]=locationData.get((i*4)+2); 
+			singleEntry[4]=locationData.get((i*4)+3); 
+
+			DbConnection gpsCon = new DbConnection(request, response); 
 			gpsCon.insert(singleEntry);
-			singleEntry = new String[4]; 
+			singleEntry = new String[5]; 
 		}
 		
 		
-		out.close();
-		//outFile.close(); 
-
 	}
+	
 
 }
