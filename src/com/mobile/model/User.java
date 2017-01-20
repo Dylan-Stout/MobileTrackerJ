@@ -1,47 +1,77 @@
 package com.mobile.model;
 
+import javax.persistence.Column; 
+import javax.persistence.Entity; 
+import javax.persistence.Id; 
+import javax.persistence.Table; 
+
+
+@Entity
+@Table(name="user")
 public class User {
 	
-	private String userName= ""; 
-
-
-
-	private String ipAddress=""; 
-
-	private boolean isValidated = false; 
-
-	private String loginError = ""; 
+	@Id
+	@Column(name="id")
+	Long id; 
 	
-	public String getUserName() {
-		return userName;
+	@Column(name="USERNAME")
+	String username; 
+	
+	@Column(name="USERIP")
+	String userip; 
+	
+	@Column(name="USERERROR")
+	String usererror; 
+	
+	@Column(name="USERHASH")
+	String userhash; 
+
+	public User(String user, String ip, String error, String hash){
+		this.username = user; 
+		this.userip = ip; 
+		this.usererror = error; 
+		this.userhash = hash; 
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUserip() {
+		return userip;
+	}
+
+	public void setUserip(String userip) {
+		this.userip = userip;
+	}
+
+	public String getUsererror() {
+		return usererror;
+	}
+
+	public void setUsererror(String usererror) {
+		this.usererror = usererror;
+	}
+
+	public String getUserhash() {
+		return userhash;
+	}
+
+	public void setUserhash(String userhash) {
+		this.userhash = userhash;
 	}
 	
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	
-	public boolean isValidated() {
-		return isValidated;
-	}
-
-	public void setValidated(boolean isValidated) {
-		this.isValidated = isValidated;
-	}
-
-	public String getLoginError() {
-		return loginError;
-	}
-
-	public void setLoginError(String loginError) {
-		this.loginError = loginError;
-	}
-
-	public String getIpAddress() {
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-
 }

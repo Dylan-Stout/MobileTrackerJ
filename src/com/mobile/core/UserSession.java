@@ -1,4 +1,4 @@
-package com.mobile.model;
+package com.mobile.core;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

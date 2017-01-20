@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mobile.model.SecurityUser;
-import com.mobile.model.User;
+import com.mobile.core.SecurityUser;
+import com.mobile.core.User;
 import com.mobile.ui.UIConstants;
 
 public class SecurityUserFilter extends SecurityUser implements Filter{

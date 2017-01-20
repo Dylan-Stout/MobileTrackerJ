@@ -1,0 +1,6 @@
+CREATE TABLE `location`.`userevent` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user` VARCHAR(45) NOT NULL,
+  `logtime` DATETIME NOT NULL,
+  `logevent` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`id`));
