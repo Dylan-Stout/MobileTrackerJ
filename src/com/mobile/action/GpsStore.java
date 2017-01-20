@@ -71,10 +71,11 @@ public class GpsStore extends HttpServlet {
 		int numMessages = locationData.size()/4;
 		for(int i=0; i<numMessages;i+=4){
 			singleEntry[0]=locationData.get(i*4);
-			Long unixTime = Long.parseLong(singleEntry[0],10); 
+			Long milTime = Long.parseLong(singleEntry[0],10); 
+			Long unixTime = milTime/1000L;  // convert milliseconds to seconds
 			singleEntry[0]=unixTime.toString(); 
-			Date time = new Date(unixTime); 
-			System.out.println(time.toString());
+			Date time = new Date(unixTime*1000L); 
+			logger.debug( unixTime +" -> " + time.toString()); //debug the time being sent
 			singleEntry[1]=time.toString(); 
 			singleEntry[2]=locationData.get((i*4)+1);
 			singleEntry[3]=locationData.get((i*4)+2); 
