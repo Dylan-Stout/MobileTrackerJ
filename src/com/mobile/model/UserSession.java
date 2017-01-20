@@ -8,6 +8,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
+import com.mobile.filter.UserManager;
+
 
 /**
  * @author dystout
