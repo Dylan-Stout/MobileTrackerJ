@@ -1,7 +1,9 @@
 package com.mobile.jdbc.hibernate;
 
-import org.hibernate.*;
-import org.hibernate.cfg.*; 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration; 
 
 public class HibernateUtil {
 
@@ -9,8 +11,12 @@ public class HibernateUtil {
 	
 	static {
 		try {
-			sessionFactory = new Configuration()
-					.configure().buildSessionFactory();
+			Configuration config = new Configuration(); 
+			//ADD Annotated classes
+			config.addAnnotatedClass(com.mobile.model.User.class); 
+			
+			sessionFactory = config.configure().buildSessionFactory();
+			
 		} catch (Throwable ex) {
 			// Log exception!
 			throw new ExceptionInInitializerError(ex);
