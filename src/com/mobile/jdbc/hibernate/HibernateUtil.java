@@ -9,6 +9,10 @@ public class HibernateUtil {
 
 	private static final SessionFactory sessionFactory;
 	
+	//TODO - Avoid sqli
+//	 Query safeHQLQuery = session.createQuery("from Inventory where productID=:productid");
+//	 safeHQLQuery.setParameter("productid", userSuppliedParameter);
+	
 	static {
 		try {
 			Configuration config = new Configuration(); 
