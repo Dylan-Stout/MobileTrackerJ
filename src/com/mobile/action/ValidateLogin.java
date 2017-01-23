@@ -68,26 +68,22 @@ public class ValidateLogin extends HttpServlet {
 			break;
 		case 1:
 			anonUser.setUsername(request.getParameter("userName"));
-		    String ipAddress = request.getHeader("X-FORWARDED-FOR");  
-		    if (ipAddress == null) {  
-		         ipAddress = request.getRemoteAddr();  
-		    }
+		    String ipAddress = request.getRemoteAddr();  
+		   
 			anonUser.setUserip(ipAddress);
 			anonUser.setUsererror(null);
-			if(SecurityHelper.checkIP(ipAddress, request, response)){ 
-				HttpSession session = request.getSession(); 
-				UserSession.addUserSession(anonUser, session);
-				rd = request.getServletContext().getRequestDispatcher("/gps/query.jsp"); 
-			}else{ 
-				
-			}
+
+			HttpSession session = request.getSession(); 
+			UserSession.addUserSession(anonUser, session);
+			rd = request.getServletContext().getRequestDispatcher("/gps/query.jsp"); 
+
 			break;
 		default:
 			anonUser.setUsererror(UIConstants.LOGIN_INVALID);
 			break;
 		}
 		request.setAttribute("user", anonUser);
-		rd.include(request, response);
+		rd.forward(request, response);
 	}
 
 	/**

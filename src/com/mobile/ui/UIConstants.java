@@ -27,7 +27,7 @@ public interface UIConstants {
 	final String DB_CONNECTION = "<font class=\"errorHelpText\">Connection Error</font>"; 
 	final String SESSION_INVALID = "<center><font class=\"errorHelpText\">Session invalid, please login.</font></center>";
 	final String LOGIN_INVALID = "<center><font class=\"errorHelpText\">Login invalid, please try again.</font></center>";
-	final String LOGIN_IP_ERR = "<center><font class=\"errorHelpText\">Login has Expired</font></center>";
+	final String LOGIN_IP_ERR = "<center><font class=\"errorHelpText\">Login blocked based on location</font></center>";
 	final String LOGIN_IN_USE = "<center><font class=\"errorHelpText\">Login in use - Logout from terminal</font></center>";
 	
 	

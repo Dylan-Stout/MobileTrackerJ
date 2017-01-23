@@ -20,7 +20,7 @@ import com.mobile.jdbc.LocationData;
 /**
  * Servlet implementation class MapGps
  */
-@WebServlet("/MapGps")
+@WebServlet("/gps/MapGps")
 public class MapGps extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,7 +46,7 @@ public class MapGps extends HttpServlet {
 		if(lData.size()>0)
 			map = new MapData(lData, request.getParameter("time")); 
 		request.setAttribute("map", map);
-		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/map.jsp"); 
+		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/gps/map.jsp"); 
 		rd.include(request, response);
 
 		

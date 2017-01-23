@@ -42,7 +42,9 @@ public class GpsStore extends HttpServlet {
 	 * Respond with coordinate list
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
+// TODO - CLOSE THIS OFF
 		logger.debug("doGet on /Gps Servlet");
 		DbConnection gps = new DbConnection(request,response); 
 		List<LocationData> lData = gps.getAllList("today");

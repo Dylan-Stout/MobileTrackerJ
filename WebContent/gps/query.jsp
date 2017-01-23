@@ -21,15 +21,15 @@
 
   <div data-role="main" class="ui-content">
    <center><h2>Time Frame</h2></center> 
-    <a href="${pageContext.request.contextPath}/MapGps?time=today" target="_blank" class="ui-btn">0-24 Hours</a>
-    <a href="${pageContext.request.contextPath}/MapGps?time=yesterday" target="_blank" class="ui-btn">24-48 Hours</a>
-    <a href="${pageContext.request.contextPath}/MapGps?time=seven_days" target="_blank" class="ui-btn">Past 7 days</a>
+    <a href="${pageContext.request.contextPath}/gps/MapGps?time=today" target="_blank" class="ui-btn">0-24 Hours</a>
+    <a href="${pageContext.request.contextPath}/gps/MapGps?time=yesterday" target="_blank" class="ui-btn">24-48 Hours</a>
+    <a href="${pageContext.request.contextPath}/gps/MapGps?time=seven_days" target="_blank" class="ui-btn">Past 7 days</a>
     <center><b>CAUTION:</b> USING 'ALL DATES' WILL TAKE CONSIDERABLE PROCESSING TIME BASED ON AVAILABLE DATA</center>
-    <a href="${pageContext.request.contextPath}/MapGps?time=all" target="_blank" class="ui-btn">All Dates (CSV)</a>
+    <a href="${pageContext.request.contextPath}/gps/MapGps?time=all" target="_blank" class="ui-btn">All Dates (CSV)</a>
   </div>
 	
 	<div class="ui-field-contain">
-		<form action="${pageContext.request.contextPath}/MapGps">
+		<form action="${pageContext.request.contextPath}/gps/MapGps">
     		<label for="textinput-fc"> Custom Date:</label>
     		<input name="textinput-fc" id="textinput-fc" placeholder="MM/DD/YYYY" value="" type="text">
     		<input type="submit" value="Search Date">
