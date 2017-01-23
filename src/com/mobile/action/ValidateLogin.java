@@ -7,11 +7,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -19,8 +21,11 @@ import org.hibernate.query.Query;
 
 import com.mobile.core.SecurityHelper;
 import com.mobile.core.SecurityHelper.CannotPerformOperationException;
+import com.mobile.core.UserManager;
+import com.mobile.core.UserSession;
 import com.mobile.jdbc.hibernate.HibernateUtil;
 import com.mobile.model.User;
+import com.mobile.ui.UIConstants;
 
 /**
  * Servlet implementation class ValidateLogin
@@ -42,38 +47,47 @@ public class ValidateLogin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Session session = HibernateUtil.getSession();
-		Query safeHQLQuery = session.createQuery("from User where username=:uname");
-		safeHQLQuery.setParameter("uname", request.getParameter("userName"));
-		String passwd = request.getParameter("password"); 
-		String hash = null; 
+		int loginCode = -100; 
+		
 		try {
-			hash = SecurityHelper.createHash(passwd);
+			loginCode = UserManager.authenticateLogin(request.getParameter("userName"), request.getParameter("password"), request, response);
 		} catch (CannotPerformOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		if(hash!=null){ 
-			logger.debug("************** HASH GENERATED = " + hash + " *******************");
-		}else{ 
-			logger.error("Unable to process blank passwords.");
-			throw new ServletException("UNABLE TO PROCESS BLANK PASSWORDS");
-		}
-		List result = safeHQLQuery.getResultList();
-		if (result.size()<=0){ 
-			//TODO - ERROR UI
-		}
-		if (result.size()==1){ 
-			User user = (User) result.get(0); 
-			String uname = user.getUsername();
-			logger.debug("PASS -> " + uname);
-		}
-		if(result.size()>1){ 
-			//TODO - ERROR UI
-		}
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		logger.debug("**************** LOGIN CODE = " + loginCode + " ****************");
+		User anonUser = new User(); 
+		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/login.jsp");
+		switch (loginCode) {
+		case -3:
+		case -2:
+		case -1:
+		case 0:
+			anonUser.setUsererror(UIConstants.LOGIN_INVALID);
+			break;
+		case 1:
+			anonUser.setUsername(request.getParameter("userName"));
+		    String ipAddress = request.getHeader("X-FORWARDED-FOR");  
+		    if (ipAddress == null) {  
+		         ipAddress = request.getRemoteAddr();  
+		    }
+			anonUser.setUserip(ipAddress);
+			anonUser.setUsererror(null);
+			if(SecurityHelper.checkIP(ipAddress, request, response)){ 
+				HttpSession session = request.getSession(); 
+				UserSession.addUserSession(anonUser, session);
+				rd = request.getServletContext().getRequestDispatcher("/gps/query.jsp"); 
+			}else{ 
+				
+			}
+			break;
+		default:
+			anonUser.setUsererror(UIConstants.LOGIN_INVALID);
+			break;
+		}
+		request.setAttribute("user", anonUser);
+		rd.include(request, response);
 	}
 
 	/**

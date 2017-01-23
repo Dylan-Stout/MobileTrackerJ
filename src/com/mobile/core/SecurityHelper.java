@@ -1,12 +1,15 @@
 package com.mobile.core;
 
 
-import java.security.SecureRandom;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.SecretKeyFactory;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Properties;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
 public class SecurityHelper
@@ -46,6 +49,20 @@ public class SecurityHelper
     public static final int HASH_SIZE_INDEX = 2;
     public static final int SALT_INDEX = 3;
     public static final int PBKDF2_INDEX = 4;
+    
+
+    
+    public static boolean checkIP(String ipaddress, HttpServletRequest request, HttpServletResponse response){ 
+    	Properties prop = (Properties)request.getServletContext().getAttribute("prop"); 
+    	String ipDelim = prop.getProperty("allowed_ip"); 
+    	String[] allowedIps = ipDelim.split(","); 
+    	for(String ip : allowedIps){ 
+    		if(ipaddress.equals(ip)){ 
+    			return true; 
+    		}
+    	}
+    	return false;
+    }
 
     public static String createHash(String password)
         throws CannotPerformOperationException

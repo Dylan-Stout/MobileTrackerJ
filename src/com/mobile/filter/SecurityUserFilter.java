@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mobile.core.SecurityUser;
-import com.mobile.core.User;
+import com.mobile.model.User;
 import com.mobile.ui.UIConstants;
 
 public class SecurityUserFilter extends SecurityUser implements Filter{
@@ -45,11 +45,11 @@ public class SecurityUserFilter extends SecurityUser implements Filter{
 			User user = (User)httpServletRequest.getSession().getAttribute("user"); 
 			if(user==null)
 				user = new User(); 
-			String username = user.getUserName(); 
+			String username = user.getUsername(); 
 			logger.error("There was an invalid navigation attempt from -- Session: " + httpServletRequest.getSession().getId() +
 					"User: " + username );
 			logger.error("Navigation Target: " + httpServletRequest.getContextPath());
-			user.setLoginError(UIConstants.SESSION_INVALID);
+			user.setUsererror(UIConstants.SESSION_INVALID);
 			httpServletRequest.setAttribute("user", user);
 			request.getServletContext().getRequestDispatcher("/login.jsp").forward(httpServletRequest, httpServletResponse);
 		}

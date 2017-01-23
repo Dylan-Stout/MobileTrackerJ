@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.mobile.core.User;
+import com.mobile.model.User;
 import com.mobile.ui.UIConstants;
 
 /**

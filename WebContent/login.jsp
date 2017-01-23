@@ -35,13 +35,13 @@
 			<form id="loginForm" method="post" class="formField" action="${pageContext.request.contextPath}/ValidateLogin">
 	
 			<b>USERNAME:</b> 
-			<input type="text" id="userName" name="userName" value='${user.userName}' required/> 
+			<input type="text" id="userName" name="userName" value='${user.username}' required/> 
 			<b>PASSWORD:</b> 
 			<input type="password" id="password" name="password" value='' required/> 
 			<center>
 			<button type="submit" value="LOGIN" style="width:90%;">LOGIN</button>
 			</center>		
-			<font size=2 color=red>${user.loginError}</font>
+			<font size=2 color=red>${user.usererror}</font>
 		</form></p>
 			</div>
 		</div>

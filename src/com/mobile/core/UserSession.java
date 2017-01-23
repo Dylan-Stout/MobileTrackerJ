@@ -8,6 +8,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
+import com.mobile.model.User;
+
 
 /**
  * @author dystout
@@ -30,8 +32,8 @@ public final class UserSession {
 	 */
 	public static void addUserSession(User user, HttpSession session){ 
 		try {
-			activeSessions.put(user.getUserName(), makeSHA1Hash(session.getId()));
-			logger.debug("Added user session to active pool for: " + user.getUserName());
+			activeSessions.put(user.getUsername(), makeSHA1Hash(session.getId()));
+			logger.debug("Added user session to active pool for: " + user.getUsername());
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} 
@@ -43,8 +45,8 @@ public final class UserSession {
 	 * @param user
 	 */
 	public static void removeUserSession(User user){ 
-		activeSessions.remove(user.getUserName()); 
-		logger.debug("Removed user session from active pool for: " + user.getUserName());
+		activeSessions.remove(user.getUsername()); 
+		logger.debug("Removed user session from active pool for: " + user.getUsername());
 	}
 	
 	/**
@@ -63,25 +65,33 @@ public final class UserSession {
 			return false; 
 		}
 		String compareHash = makeSHA1Hash(session.getId()); 
-		String activeHash = activeSessions.get(user.getUserName()); 
+		String activeHash = activeSessions.get(user.getUsername()); 
 		return activeHash.equals(compareHash); 
 	}
 	
 
 	/**
-	 * Validate user hash against db. 
+	 * Creates hash for use in active pool. 
 	 * 
 	 * @param input
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
 	 */
-    private static boolean validateHash(String input)
+    private static String makeSHA1Hash(String input)
             throws NoSuchAlgorithmException, UnsupportedEncodingException
         {
-    	
-    	
-         return false;    
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            md.reset();
+            byte[] buffer = input.getBytes("UTF-8");
+            md.update(buffer);
+            byte[] digest = md.digest();
+
+            String hexStr = "";
+            for (int i = 0; i < digest.length; i++) {
+                hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
+            }
+            return hexStr;
         }    
 
 }
