@@ -1,6 +1,9 @@
 package com.mobile.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,11 +44,31 @@ public class ValidateLogin extends HttpServlet {
 		Session session = HibernateUtil.getSession();
 		Query safeHQLQuery = session.createQuery("from User where username=:uname");
 		safeHQLQuery.setParameter("uname", request.getParameter("userName"));
+		String passwd = request.getParameter("password"); 
+		String hash = null; 
+		try {
+			hash = fetchHash(passwd);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		if(hash!=null){ 
+			logger.debug("************** HASH GENERATED = " + hash + " *******************");
+		}else{ 
+			logger.error("Unable to process blank passwords.");
+			throw new ServletException("UNABLE TO PROCESS BLANK PASSWORDS");
+		}
 		List result = safeHQLQuery.getResultList();
+		if (result.size()<=0){ 
+			//TODO - ERROR UI
+		}
 		if (result.size()==1){ 
 			User user = (User) result.get(0); 
 			String uname = user.getUsername();
 			logger.debug("PASS -> " + uname);
+		}
+		if(result.size()>1){ 
+			//TODO - ERROR UI
 		}
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -57,6 +80,21 @@ public class ValidateLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private String fetchHash(String input) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        MessageDigest md = MessageDigest.getInstance("SHA1");
+        md.reset();
+        byte[] buffer = input.getBytes("UTF-8");
+        md.update(buffer);
+        byte[] digest = md.digest();
+
+        String hexStr = "";
+        for (int i = 0; i < digest.length; i++) {
+            hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
+        }
+        return hexStr;
+		
 	}
 
 }

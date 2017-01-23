@@ -1,4 +1,4 @@
-package com.mobile.filter;
+package com.mobile.core;
 
 
 import java.net.InetAddress;
@@ -10,8 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.mobile.core.User;
-import com.mobile.core.UserSession;
 import com.mobile.ui.UIConstants;
 
 /**

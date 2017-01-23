@@ -8,8 +8,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
-import com.mobile.filter.UserManager;
-
 
 /**
  * @author dystout
@@ -92,9 +90,6 @@ public final class UserSession {
                 hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
             }
             return hexStr;
-        }
-
-
-    
+        }    
 
 }
