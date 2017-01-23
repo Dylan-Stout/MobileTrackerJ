@@ -65,6 +65,8 @@ public class ValidateLogin extends HttpServlet {
 		case -1:
 		case 0:
 			anonUser.setUsererror(UIConstants.LOGIN_INVALID);
+			request.getSession().setAttribute("user", anonUser);
+			request.setAttribute("user", anonUser);
 			break;
 		case 1:
 			anonUser.setUsername(request.getParameter("userName"));
@@ -76,14 +78,23 @@ public class ValidateLogin extends HttpServlet {
 			HttpSession session = request.getSession(); 
 			UserSession.addUserSession(anonUser, session);
 			rd = request.getServletContext().getRequestDispatcher("/gps/query.jsp"); 
+			request.getSession().setAttribute("user", anonUser);
+			request.setAttribute("user", anonUser);
 
 			break;
 		default:
 			anonUser.setUsererror(UIConstants.LOGIN_INVALID);
+			request.getSession().setAttribute("user", anonUser);
+			request.setAttribute("user", anonUser);
 			break;
 		}
-		request.setAttribute("user", anonUser);
+
+	
+		if(loginCode==0){
+			response.sendRedirect("/gps/query.jsp");
+		}
 		rd.forward(request, response);
+
 	}
 
 	/**

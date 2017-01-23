@@ -20,12 +20,14 @@
   </div>
 
   <div data-role="main" class="ui-content">
-   <center><h2>Time Frame</h2></center> 
-    <a href="${pageContext.request.contextPath}/gps/MapGps?time=today" target="_blank" class="ui-btn">0-24 Hours</a>
-    <a href="${pageContext.request.contextPath}/gps/MapGps?time=yesterday" target="_blank" class="ui-btn">24-48 Hours</a>
-    <a href="${pageContext.request.contextPath}/gps/MapGps?time=seven_days" target="_blank" class="ui-btn">Past 7 days</a>
-    <center><b>CAUTION:</b> USING 'ALL DATES' WILL TAKE CONSIDERABLE PROCESSING TIME BASED ON AVAILABLE DATA</center>
-    <a href="${pageContext.request.contextPath}/gps/MapGps?time=all" target="_blank" class="ui-btn">All Dates (CSV)</a>
+    <div data-role="controlgroup" data-type="vertical">
+   		<center><h2>Time Frame</h2></center> 
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=today" class="ui-btn">0-24 Hours</a>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=yesterday" class="ui-btn">24-48 Hours</a>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=seven_days" class="ui-btn">Past 7 days</a>
+    	<center><b>CAUTION:</b> USING 'ALL DATES' WILL TAKE CONSIDERABLE PROCESSING TIME BASED ON AVAILABLE DATA</center>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=all" class="ui-btn">All Dates (CSV)</a>
+    </div>
   </div>
 	
 	<div class="ui-field-contain">

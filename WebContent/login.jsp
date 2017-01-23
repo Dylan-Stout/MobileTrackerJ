@@ -32,7 +32,7 @@
 				<center><h3>User Authentication</h3></center>
 
 				<p>
-			<form id="loginForm" method="post" class="formField" action="${pageContext.request.contextPath}/ValidateLogin">
+			<form id="loginForm" method="post" class="formField" action="${pageContext.request.contextPath}/ValidateLogin" data-ajax="false">
 	
 			<b>USERNAME:</b> 
 			<input type="text" id="userName" name="userName" value='${user.username}' required/> 
