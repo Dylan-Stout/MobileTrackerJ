@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import com.mobile.core.SecurityHelper;
+import com.mobile.core.SecurityHelper.CannotPerformOperationException;
 import com.mobile.jdbc.hibernate.HibernateUtil;
 import com.mobile.model.User;
 
@@ -47,8 +49,8 @@ public class ValidateLogin extends HttpServlet {
 		String passwd = request.getParameter("password"); 
 		String hash = null; 
 		try {
-			hash = fetchHash(passwd);
-		} catch (NoSuchAlgorithmException e) {
+			hash = SecurityHelper.createHash(passwd);
+		} catch (CannotPerformOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
@@ -82,19 +84,6 @@ public class ValidateLogin extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private String fetchHash(String input) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        MessageDigest md = MessageDigest.getInstance("SHA1");
-        md.reset();
-        byte[] buffer = input.getBytes("UTF-8");
-        md.update(buffer);
-        byte[] digest = md.digest();
 
-        String hexStr = "";
-        for (int i = 0; i < digest.length; i++) {
-            hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
-        }
-        return hexStr;
-		
-	}
 
 }
