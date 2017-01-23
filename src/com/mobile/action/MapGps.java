@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.mobile.builder.JsBuilder;
 import com.mobile.jdbc.DbConnection;
-import com.mobile.jdbc.GpsMap;
+import com.mobile.jdbc.MapData;
 import com.mobile.jdbc.LocationData;
 
 /**
@@ -42,9 +42,9 @@ public class MapGps extends HttpServlet {
 		logger.debug("Generating map data from source connection.");
 		DbConnection gps = new DbConnection(request,response); 
 		List<LocationData> lData = gps.getAllList(request.getParameter("time"));
-		GpsMap map = null; 
+		MapData map = null; 
 		if(lData.size()>0)
-			map = new GpsMap(lData, request.getParameter("time")); 
+			map = new MapData(lData, request.getParameter("time")); 
 		request.setAttribute("map", map);
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/map.jsp"); 
 		rd.include(request, response);

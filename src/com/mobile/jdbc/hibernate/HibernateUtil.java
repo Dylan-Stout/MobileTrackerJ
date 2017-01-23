@@ -1,9 +1,12 @@
 package com.mobile.jdbc.hibernate;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration; 
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query; 
 
 public class HibernateUtil {
 
@@ -12,6 +15,7 @@ public class HibernateUtil {
 	//TODO - Avoid sqli
 //	 Query safeHQLQuery = session.createQuery("from Inventory where productID=:productid");
 //	 safeHQLQuery.setParameter("productid", userSuppliedParameter);
+
 	
 	static {
 		try {

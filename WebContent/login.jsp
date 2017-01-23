@@ -35,7 +35,7 @@
 			<form id="loginForm" method="post" class="formField" action="${pageContext.request.contextPath}/ValidateLogin">
 	
 			<b>USERNAME:</b> 
-			<input type="text" id="userName" name="userName" value='${user.userName}' onkeypress="handleCarriageReturn(event)" required/> 
+			<input type="text" id="userName" name="userName" value='${user.userName}' required/> 
 			<b>PASSWORD:</b> 
 			<input type="password" id="password" name="password" value='' required/> 
 			<center>

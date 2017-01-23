@@ -29,6 +29,9 @@ public class User {
 	@Column(name="USERHASH")
 	String userhash; 
 
+	public User(){ 
+		
+	}
 	public User(String user, String ip, String error, String hash){
 		this.username = user; 
 		this.userip = ip; 

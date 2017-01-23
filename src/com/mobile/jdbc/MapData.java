@@ -11,10 +11,10 @@ import org.apache.log4j.Logger;
 
 import com.mobile.builder.JsBuilder;
 
-public class GpsMap {
+public class MapData {
 	
 	
-	final static Logger logger = Logger.getLogger(GpsMap.class);
+	final static Logger logger = Logger.getLogger(MapData.class);
 	
 	List<LocationData> gpsCoords = new ArrayList<LocationData>();
 	String jsPoint = new String(); 
@@ -24,7 +24,7 @@ public class GpsMap {
 	String startLng = new String(); 
 	String dateStamp = new String(); 
 	
-	public GpsMap(List<LocationData> locationData, String time){ 
+	public MapData(List<LocationData> locationData, String time){ 
 		gpsCoords = locationData; 
 		startLat = locationData.get(0).latitude; 
 		if(startLat.equals("")||startLat == null)
