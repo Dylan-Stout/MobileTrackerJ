@@ -46,12 +46,12 @@ public class GpsStore extends HttpServlet {
 		
 // TODO - CLOSE THIS OFF
 		logger.debug("doGet on /Gps Servlet");
-		DbConnection gps = new DbConnection(request,response); 
-		List<LocationData> lData = gps.getAllList("today");
-		for(LocationData l : lData){ 
-			response.getWriter().println(l.getLatitude() + "," + l.getLongitude()); 
-			logger.debug(l.getLatitude() + "," + l.getLongitude());
-		}
+//		DbConnection gps = new DbConnection(request,response); 
+//		List<LocationData> lData = gps.getAllList("today");
+//		for(LocationData l : lData){ 
+//			response.getWriter().println(l.getLatitude() + "," + l.getLongitude()); 
+//			logger.debug(l.getLatitude() + "," + l.getLongitude());
+//		}
 		
 	}
 

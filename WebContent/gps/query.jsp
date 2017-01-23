@@ -22,11 +22,11 @@
   <div data-role="main" class="ui-content">
     <div data-role="controlgroup" data-type="vertical">
    		<center><h2>Time Frame</h2></center> 
-    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=today" class="ui-btn">0-24 Hours</a>
-    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=yesterday" class="ui-btn">24-48 Hours</a>
-    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=seven_days" class="ui-btn">Past 7 days</a>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=today" class="ui-btn" data-ajax="false">0-24 Hours</a>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=yesterday" class="ui-btn" data-ajax="false">24-48 Hours</a>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=seven_days" class="ui-btn" data-ajax="false">Past 7 days</a>
     	<center><b>CAUTION:</b> USING 'ALL DATES' WILL TAKE CONSIDERABLE PROCESSING TIME BASED ON AVAILABLE DATA</center>
-    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=all" class="ui-btn">All Dates (CSV)</a>
+    	<a href="${pageContext.request.contextPath}/gps/MapGps?time=all" class="ui-btn" data-ajax="false">All Dates (CSV)</a>
     </div>
   </div>
 	

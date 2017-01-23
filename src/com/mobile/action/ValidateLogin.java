@@ -90,10 +90,12 @@ public class ValidateLogin extends HttpServlet {
 		}
 
 	
-		if(loginCode==0){
-			response.sendRedirect("/gps/query.jsp");
+		if(loginCode==1){
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/gps/query.jsp"));
+		}else{ 
+			rd.forward(request, response);
 		}
-		rd.forward(request, response);
+
 
 	}
 
