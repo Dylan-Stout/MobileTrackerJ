@@ -11,8 +11,11 @@ public class JsBuilder {
 	List data = null; 
 	final static Logger logger = Logger.getLogger(JsBuilder.class);
 	public String jsPoint = ""; 
+	public String jsPointHide = ""; 
 	public String jsHeat = ""; 
 	public String jsPath = ""; 
+	public String markers = ""; 
+	
     
 	
 	public JsBuilder(){ 
@@ -28,17 +31,28 @@ public class JsBuilder {
 	
 	public String buildMapCoordinates(){ 
 		StringBuilder sb = new StringBuilder(); 
+		StringBuilder points = new StringBuilder(); 
+		StringBuilder marksList = new StringBuilder(); 
+		marksList.append("var "); 
 		for(int i =0; i<data.size(); i++){ 
 			if(data.get(i) instanceof LocationData){ 
+				marksList.append("marker" + i);
 				LocationData dataEnt = (LocationData) data.get(i); 
 				sb.append(" var loc" + i + " = {lat: " + dataEnt.latitude+ ", lng: " + dataEnt.longitude+"};");
-				sb.append(" var marker" + i + " =  new google.maps.Marker({ position: loc" + i + ", map: map });");
+				sb.append(" marker" + i + " =  new google.maps.Marker({ position: loc" + i + ", map: map });");
 				sb.append(buildInfoWindow(dataEnt,i)); 
-				
+				points.append( "marker"+i+".setMap(marker"+i+".getMap() ? null : map); ");
+				if((i+1)<data.size()){
+					marksList.append(",");
+				}else{ 
+					marksList.append(";"); 
+				}
 			}else{ 
 				logger.error("Data is not valid location data.");
 			}
 		}
+		markers = marksList.toString(); 
+		jsPointHide=points.toString(); 
 		return sb.toString(); 
 	}
 	
@@ -105,6 +119,22 @@ public class JsBuilder {
 
 	public void setJsPath(String jsPath) {
 		this.jsPath = jsPath;
+	}
+
+	public String getJsPointHide() {
+		return jsPointHide;
+	}
+
+	public void setJsPointHide(String jsPointHide) {
+		this.jsPointHide = jsPointHide;
+	}
+
+	public String getMarkers() {
+		return markers;
+	}
+
+	public void setMarkers(String markers) {
+		this.markers = markers;
 	}
 	
 	

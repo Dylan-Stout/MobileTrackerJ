@@ -20,6 +20,8 @@ public class MapData {
 	String jsPoint = new String(); 
 	String jsHeat = new String(); 
 	String jsPath = new String(); 
+	String jsPointHide = new String(); 
+	String markers = new String(); 
 	String startLat = new String(); 
 	String startLng = new String(); 
 	String dateStamp = new String(); 
@@ -56,8 +58,10 @@ public class MapData {
 		logger.debug("Map data available for: " + dateStamp + " starting at " + startLat.toString() + "," + startLng.toString() + "\n Time range may be larger than available data"); 
 		JsBuilder jsBuild = new JsBuilder(gpsCoords); 
 		jsPoint = jsBuild.getJsPoint(); 
+		jsPointHide = jsBuild.getJsPointHide();
 		jsHeat = jsBuild.getJsHeat(); 
 		jsPath = jsBuild.getJsPath(); 
+		markers = jsBuild.getMarkers(); 
 		logger.debug("Generated js:" + jsPoint);
 				
 	}
@@ -116,6 +120,22 @@ public class MapData {
 
 	public void setJsPath(String jsPath) {
 		this.jsPath = jsPath;
+	}
+
+	public String getJsPointHide() {
+		return jsPointHide;
+	}
+
+	public void setJsPointHide(String jsPointHide) {
+		this.jsPointHide = jsPointHide;
+	}
+
+	public String getMarkers() {
+		return markers;
+	}
+
+	public void setMarkers(String markers) {
+		this.markers = markers;
 	}
 	
 	

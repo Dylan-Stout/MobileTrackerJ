@@ -17,7 +17,7 @@
             	    <div id="floating-panel">
       					<button onclick="toggleHeatmap()">Heatmap</button>
       					<button onclick="togglePath()">Paths</button>
-      					<button onclick="toggleHeatmap()">Points</button>
+      					<button onclick="togglePoints()">Points</button>
       					<button onclick="changeGradient()">List</button>
     				</div>
             	
@@ -35,6 +35,7 @@
             </style>            
             <script type="text/javascript">
             	var map, heatmap, path;
+            	${map.markers}
                 $(document).on('pageshow', '#map-page', function(e, data) {
                     var myLocation = { 
                             lat: 50, 
@@ -57,6 +58,9 @@
                }
                function togglePath(){ 
             	   path.setMap(path.getMap() ? null : map);
+               }
+               function togglePoints(){ 
+            	   ${map.jsPointHide}
                }
 
             </script>           

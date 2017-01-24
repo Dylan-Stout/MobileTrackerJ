@@ -43,8 +43,7 @@ public class UserManager {
 	 */
 	public static int authenticateLogin(String username, String password, HttpServletRequest request, HttpServletResponse response) throws CannotPerformOperationException{ 
 		
-//		User user = new User(); 
-//		user.setUserName(username);
+
 		int loginCode = -1; //default error code
 		
 		Session session = HibernateUtil.getSession();
@@ -78,65 +77,7 @@ public class UserManager {
 		}
 		
 		return loginCode; 
-			
 
-//		String machineName = ""; 
-//		
-//	    String ipAddress = request.getHeader("X-FORWARDED-FOR");  
-//	    if (ipAddress == null) {  
-//	         ipAddress = request.getRemoteAddr();  
-//	    }
-//	    if(ipAddress == null)
-//	    	logger.error("Unable to gather remote IP from user authentication attempt " + username);
-//	    
-//	    user.setIpAddress(ipAddress);
-//	    user.setUserName(username);
-//
-//		try {
-//			logger.info("Attempting to login user: " + username);
-//			if(username!="" && password!= ""){
-//				// TODO - ADD LOGIN AUTH
-//			}else{
-//				loginCode=-1; 
-//			}
-//
-//		} catch (Exception e) {
-//			logger.error("*** Error validating login, Database problem exists. ****-");
-//			e.printStackTrace();
-//		} 
-//
-//		if(loginCode == 1){ 
-//			user.setValidated(true); 
-//		}else{ 
-//			switch(loginCode){ 
-//			case -1: // Wrong password | no user exiting 
-//				user.setLoginError(UIConstants.LOGIN_INVALID);
-//				break;
-//			case -2:  // IP Address not allowed
-//				user.setLoginError(UIConstants.LOGIN_IP_ERR); 
-//				break;
-//			//TODO - ADD USER LOGGED IN
-////			case -3: // user already logged in
-////				try {
-////					String previousMachine = WrxjConnection.getPreviousMachineName(username); 
-////					if(previousMachine!=null){ 
-////						userServer.logOut(username, previousMachine);
-////						UserSession.removeUserSession(user);
-////						logger.info("User: " + username + " - already logged in, logged out from previous terminal and revalidating on this machine");
-////						user = authenticateLogin(username,password); 
-////					}else{ 
-////						user.setLoginError("Login in use - Logout from terminal");
-////					}					
-////				} catch (DBException e) {
-////					logger.error("Login already in use and could not logout previous session: " + e.getMessage());
-////					user.setLoginError(UIConstants.LOGIN_IN_USE);
-////					e.printStackTrace();
-////				}
-////				break; 
-//			}
-//		}
-//
-//		return user; 
 
 	}
 	
