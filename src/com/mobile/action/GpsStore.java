@@ -38,24 +38,16 @@ public class GpsStore extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * Respond with coordinate list
-	 */
+    /**
+     * No use
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-// TODO - CLOSE THIS OFF
 		logger.debug("doGet on /Gps Servlet");
-//		DbConnection gps = new DbConnection(request,response); 
-//		List<LocationData> lData = gps.getAllList("today");
-//		for(LocationData l : lData){ 
-//			response.getWriter().println(l.getLatitude() + "," + l.getLongitude()); 
-//			logger.debug(l.getLatitude() + "," + l.getLongitude());
-//		}
-		
 	}
 
 	/**
+	 * Add entry of gps coords to database. 
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
