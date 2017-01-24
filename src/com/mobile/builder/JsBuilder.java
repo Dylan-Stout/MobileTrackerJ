@@ -57,6 +57,7 @@ public class JsBuilder {
 			}
 		}
 		sb.append("];}");
+		sb.append("heatmap.set('radius', 10);");
 		return sb.toString(); 
 	}
 	
