@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div data-role="footer" data-position="fixed" data-tap-toggle="false">
-			<h1>GreyHelm&copy; ver. 0.6.1</h1>
+			<h1>GreyHelm&copy; ver. 0.7.0b</h1>
 
 		</div>
 	</div>
