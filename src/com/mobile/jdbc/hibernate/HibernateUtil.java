@@ -22,6 +22,7 @@ public class HibernateUtil {
 			Configuration config = new Configuration(); 
 			//ADD Annotated classes
 			config.addAnnotatedClass(com.mobile.model.User.class); 
+			config.addAnnotatedClass(com.mobile.model.Gps.class); 
 			
 			sessionFactory = config.configure().buildSessionFactory();
 			

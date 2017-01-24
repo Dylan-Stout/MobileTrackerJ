@@ -1,26 +1,24 @@
 package com.mobile.action;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.NameValuePair;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import com.mobile.jdbc.DbConnection;
-import com.mobile.jdbc.LocationData;
+import com.mobile.jdbc.hibernate.HibernateUtil;
+import com.mobile.model.Gps;
 
 /**
  * Servlet implementation class GpsStore
@@ -61,25 +59,40 @@ public class GpsStore extends HttpServlet {
 			locationData.add(paramValues[0]);
 		}
 		
-		String[] singleEntry = new String[5];
-		int numMessages = locationData.size()/4;
-		for(int i=0; i<numMessages;i+=4){
-			singleEntry[0]=locationData.get(i*4);
-			Long milTime = Long.parseLong(singleEntry[0],10); 
-			Long unixTime = milTime/1000L;  // convert milliseconds to seconds
-			singleEntry[0]=unixTime.toString(); 
-			Date time = new Date(unixTime*1000L); 
-			logger.debug( unixTime +" -> " + time.toString()); //debug the time being sent
-			singleEntry[1]=time.toString(); 
-			singleEntry[2]=locationData.get((i*4)+1);
-			singleEntry[3]=locationData.get((i*4)+2); 
-			singleEntry[4]=locationData.get((i*4)+3); 
+		Session session = null; 
+		Transaction tx = null; 
+		try{
+			session = HibernateUtil.getSession(); 
+			tx = session.beginTransaction(); 
+			EntityManagerFactory emf = session.getEntityManagerFactory();
+			EntityManager em = emf.createEntityManager(); 
+			em.getTransaction().begin();
+			Gps gps = new Gps(); 
+			int numMessages = locationData.size()/4;
+			for(int i=0; i<numMessages;i+=4){
+				Long milTime = Long.parseLong(locationData.get(i*4),10); 
+				Long unixTime = milTime/1000L;  // convert milliseconds to seconds
+				gps.setId(unixTime.toString());
+				Date time = new Date(unixTime*1000L); 
+				logger.debug(unixTime + " -> " + time.toString()); //degub time conversion			
+				gps.setDate(time.toString());
+				gps.setLatitude(locationData.get((i*4)+1));
+				gps.setLongitude(locationData.get((i*4)+2));
+				gps.setSpeed(locationData.get((i*4)+3));
 
-			DbConnection gpsCon = new DbConnection(request, response); 
-			gpsCon.insert(singleEntry);
-			singleEntry = new String[5]; 
+				session.save(gps);
+
+				gps = new Gps(); 
+				logger.debug("[INCOMING] OK - ** Coordinate pair data recieved  **");
+			}
+			tx.commit();
+			session.close();
+			logger.debug("Peristed " + numMessages + " entries. Closing session.");
+		}catch(Exception e){ 
+			e.printStackTrace();
+			if(tx != null)
+				tx.rollback();
 		}
-		
 		
 	}
 	

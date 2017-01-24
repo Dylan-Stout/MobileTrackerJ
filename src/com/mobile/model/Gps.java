@@ -12,9 +12,8 @@ import javax.persistence.Table;
 public class Gps {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	Long id; 
+	String id; 
 
 	@Column(name="date")
 	String date; 
@@ -39,11 +38,11 @@ public class Gps {
 		this.speed = sp; 
 	}
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
