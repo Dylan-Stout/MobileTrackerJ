@@ -39,7 +39,6 @@ public class MapGps extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		logger.debug("Generating map data from source connection.");
 		DbConnection gps = new DbConnection(request,response); 
 		List<LocationData> lData = null; 
@@ -54,8 +53,6 @@ public class MapGps extends HttpServlet {
 		request.setAttribute("map", map);
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/gps/map.jsp"); 
 		rd.include(request, response);
-
-		
 
 	}
 

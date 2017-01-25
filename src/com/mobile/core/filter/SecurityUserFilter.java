@@ -1,4 +1,4 @@
-package com.mobile.filter;
+package com.mobile.core.filter;
 
 import java.io.IOException;
 
