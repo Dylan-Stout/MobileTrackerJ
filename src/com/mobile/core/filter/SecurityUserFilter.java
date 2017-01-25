@@ -30,9 +30,7 @@ public class SecurityUserFilter extends SecurityUser implements Filter{
 		
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request; 
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response; 
-		
-		
-		
+	
 		if(doSecurityCheck(httpServletRequest, httpServletResponse)){ 
 			try {
 				checkSessionData(httpServletRequest, httpServletResponse);

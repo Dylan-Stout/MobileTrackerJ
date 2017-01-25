@@ -12,17 +12,29 @@
         <title>${map.dateStamp}</title>
     </head>
     <body>
-        <div data-role="page" id="map-page">            
-            <div data-role="content" id="content">
+
+        <div data-role="page" id="map-page">
+        	<div data-role="panel" id="plotlistbar">
+			TEst
+			
+		</div>
+		<div data-role="main" class="ui-content">
+		<div data-role="content" id="content">
             	    <div id="floating-panel">
       					<button onclick="toggleHeatmap()">Heatmap</button>
       					<button onclick="togglePath()">Paths</button>
       					<button onclick="togglePoints()">Points</button>
-      					<button onclick="changeGradient()">Time</button>
+      					<button onclick="toggleTimeline()">Timeline</button>
+      					<a data-role="button" href="#plotlistbar">List</a>
     				</div>
             	
                 <div id="canvas-map" style="height:100%"/>
-            </div>      
+       </div>      
+            <div data-role="content" id="timelinebar"> 
+            
+            </div>
+		</div>
+            
             <style>
                 #content {
                     padding: 0 !important; 
@@ -31,7 +43,35 @@
                     right : 0 !important; 
                     bottom : 5px !important;  
                     left : 0 !important;     
-                }       
+                } 
+                #timelinebar{ 
+                	background-color: green; 
+                	position: fixed; 
+                	top: 0; 
+                	right: 15%; 
+                	width: 70%; 
+                	display:none; 
+                }
+                #plotlistbar{ 
+                	background-color: red; 
+                	position: fixed; 
+                	top: 0; 
+                	left: 0; 
+                	width: 350px; 
+                	height: 100%; 
+                	display: none; 
+                	z-index: 10; 
+                	padding: none !important; 
+                }
+				#rightlistmenu{ 
+					float:right; 
+					width:20%; 
+					background-color: yellow; 
+				}
+				#leftlistmenu{ 
+					width: 80%; 
+				}
+ 
             </style>            
             <script type="text/javascript">
             	var map, heatmap, path;
@@ -61,6 +101,12 @@
                }
                function togglePoints(){ 
             	   ${map.jsPointHide}
+               }
+               function toggleTimeline(){ 
+            	   $("#timelinebar").slideToggle(); 
+               }
+               function toggleList(){ 
+            	   $("#plotlistbar").slideToggle();
                }
 
             </script>           
