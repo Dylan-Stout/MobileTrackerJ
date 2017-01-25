@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
-import com.mobile.builder.JsBuilder;
 import com.mobile.jdbc.DbConnection;
-import com.mobile.jdbc.MapData;
 import com.mobile.jdbc.LocationData;
+import com.mobile.jdbc.MapData;
+import com.mobile.jdbc.hibernate.HibernateUtil;
 
 /**
  * Servlet implementation class MapGps
@@ -41,7 +42,12 @@ public class MapGps extends HttpServlet {
 
 		logger.debug("Generating map data from source connection.");
 		DbConnection gps = new DbConnection(request,response); 
-		List<LocationData> lData = gps.getAllList(request.getParameter("time"));
+		List<LocationData> lData = null; 
+		if(request.getParameter("time")==null){ 
+			lData = gps.getLocationData(); 
+		}else{ 
+			lData = gps.getLocationData(request.getParameter("time")); 
+		}
 		MapData map = null; 
 		if(lData.size()>0)
 			map = new MapData(lData, request.getParameter("time")); 

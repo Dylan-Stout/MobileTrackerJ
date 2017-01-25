@@ -34,19 +34,19 @@ public class MapData {
 		startLng = locationData.get(0).longitude; 
 		if(startLng.equals("")||startLng==null)
 			startLng = "-111.891"; 
-		Long minUnix = locationData.get(0).getTime(); 
-		Long maxUnix = locationData.get(0).getTime();
+		Long minUnix = Long.valueOf(locationData.get(0).getTime()); 
+		Long maxUnix = Long.valueOf(locationData.get(0).getTime());
 		String startDate = locationData.get(0).getHrDate(); 
 		String endDate =locationData.get(0).getHrDate(); 
 		for(LocationData lData : locationData){ 
 			if(lData.getTime()!=null){ 
-				if(lData.getTime()<minUnix){ 
+				if(Long.valueOf(lData.getTime())<minUnix){ 
 					startDate = lData.getHrDate(); 
-					minUnix = lData.getTime(); 
+					minUnix = Long.valueOf(lData.getTime()); 
 				}
-				if(lData.getTime()>maxUnix){ 
+				if(Long.valueOf(lData.getTime())>maxUnix){ 
 					endDate = lData.getHrDate(); 
-					maxUnix = lData.getTime(); 
+					maxUnix = Long.valueOf(lData.getTime()); 
 				}
 			}
 		}

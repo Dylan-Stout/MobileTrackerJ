@@ -18,7 +18,7 @@
       					<button onclick="toggleHeatmap()">Heatmap</button>
       					<button onclick="togglePath()">Paths</button>
       					<button onclick="togglePoints()">Points</button>
-      					<button onclick="changeGradient()">List</button>
+      					<button onclick="changeGradient()">Time</button>
     				</div>
             	
                 <div id="canvas-map" style="height:100%"/>

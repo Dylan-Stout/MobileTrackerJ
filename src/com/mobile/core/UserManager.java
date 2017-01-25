@@ -75,7 +75,7 @@ public class UserManager {
 		if(result.size()>1){ 
 			return -3; //TOO MANY RESULTS
 		}
-		
+		session.close();
 		return loginCode; 
 
 

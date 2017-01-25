@@ -4,13 +4,14 @@ import java.util.function.LongToIntFunction;
 
 public class LocationData {
 	
-	public Long time; 
+	public String time; 
 	public String hrDate; // human readable date
 	public String longitude; 
 	public String latitude; 
 	public String speed; 
 	
-	public LocationData(Long ti, String hr, String longt, String lat, String sp){ 
+	
+	public LocationData(String ti, String hr, String longt, String lat, String sp){ 
 		time = ti; 
 		hrDate = hr; 
 		longitude = longt; 
@@ -18,11 +19,11 @@ public class LocationData {
 		speed = sp; 
 	}
 
-	public Long getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Long time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 

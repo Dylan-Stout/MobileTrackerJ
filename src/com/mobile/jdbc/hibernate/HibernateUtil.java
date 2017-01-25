@@ -10,7 +10,7 @@ import org.hibernate.query.Query;
 
 public class HibernateUtil {
 
-	private static final SessionFactory sessionFactory;
+	private static final Session session; 
 	
 	//TODO - Avoid sqli
 //	 Query safeHQLQuery = session.createQuery("from Inventory where productID=:productid");
@@ -22,10 +22,11 @@ public class HibernateUtil {
 			Configuration config = new Configuration(); 
 			//ADD Annotated classes
 			config.addAnnotatedClass(com.mobile.model.User.class); 
+			config.addAnnotatedClass(com.mobile.model.UserEvent.class);
 			config.addAnnotatedClass(com.mobile.model.Gps.class); 
 			
-			sessionFactory = config.configure().buildSessionFactory();
-			
+			final SessionFactory sessionFactory = config.configure().buildSessionFactory();
+			session = sessionFactory.openSession(); 
 		} catch (Throwable ex) {
 			// Log exception!
 			throw new ExceptionInInitializerError(ex);
@@ -34,6 +35,6 @@ public class HibernateUtil {
 
 	public static Session getSession()
 			throws HibernateException {
-		return sessionFactory.openSession();
+		return session;
 	}
 }
