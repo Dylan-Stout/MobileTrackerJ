@@ -21,7 +21,10 @@ public class MapData {
 	String jsHeat = new String(); 
 	String jsPath = new String(); 
 	String jsPointHide = new String(); 
+	String jsPointList = new String(); 
+	String jsPointListActions = new String(); 
 	String markers = new String(); 
+	String windows = new String(); 
 	String startLat = new String(); 
 	String startLng = new String(); 
 	String dateStamp = new String(); 
@@ -61,6 +64,9 @@ public class MapData {
 		jsPointHide = jsBuild.getJsPointHide();
 		jsHeat = jsBuild.getJsHeat(); 
 		jsPath = jsBuild.getJsPath(); 
+		jsPointList = jsBuild.getJsPointList(); 
+		jsPointListActions = jsBuild.getJsPointListActions();
+		windows = jsBuild.getWindows(); 
 		markers = jsBuild.getMarkers(); 
 		logger.debug("Generated js:" + jsPoint);
 				
@@ -136,6 +142,30 @@ public class MapData {
 
 	public void setMarkers(String markers) {
 		this.markers = markers;
+	}
+
+	public String getJsPointList() {
+		return jsPointList;
+	}
+
+	public void setJsPointList(String jsPointList) {
+		this.jsPointList = jsPointList;
+	}
+
+	public String getJsPointListActions() {
+		return jsPointListActions;
+	}
+
+	public void setJsPointListActions(String jsPointListActions) {
+		this.jsPointListActions = jsPointListActions;
+	}
+
+	public String getWindows() {
+		return windows;
+	}
+
+	public void setWindows(String windows) {
+		this.windows = windows;
 	}
 	
 	

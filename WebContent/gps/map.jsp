@@ -15,9 +15,8 @@
 
         <div data-role="page" id="map-page">
         	<div data-role="panel" id="plotlistbar">
-			TEst
-			
-		</div>
+				${map.jsPointList}
+			</div>
 		<div data-role="main" class="ui-content">
 		<div data-role="content" id="content">
             	    <div id="floating-panel">
@@ -53,15 +52,7 @@
                 	display:none; 
                 }
                 #plotlistbar{ 
-                	background-color: red; 
-                	position: fixed; 
-                	top: 0; 
-                	left: 0; 
-                	width: 350px; 
-                	height: 100%; 
-                	display: none; 
-                	z-index: 10; 
-                	padding: none !important; 
+
                 }
 				#rightlistmenu{ 
 					float:right; 
@@ -76,6 +67,7 @@
             <script type="text/javascript">
             	var map, heatmap, path;
             	${map.markers}
+            	${map.windows}
                 $(document).on('pageshow', '#map-page', function(e, data) {
                     var myLocation = { 
                             lat: 50, 
@@ -108,6 +100,7 @@
                function toggleList(){ 
             	   $("#plotlistbar").slideToggle();
                }
+              ${map.jsPointListActions}
 
             </script>           
         </div>
