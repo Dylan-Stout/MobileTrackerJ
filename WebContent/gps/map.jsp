@@ -25,6 +25,7 @@
       					<button onclick="togglePoints()">Points</button>
       					<button onclick="toggleTimeline()">Timeline</button>
       					<a data-role="button" href="#plotlistbar">List</a>
+      					<a data-role="button" href="${pageContext.request.contextPath}/gps/BuildXml">Export KML</a>
     				</div>
             	
                 <div id="canvas-map" style="height:100%"/>

@@ -9,14 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
 
 import com.mobile.jdbc.DbConnection;
-import com.mobile.jdbc.LocationData;
-import com.mobile.jdbc.MapData;
 import com.mobile.jdbc.hibernate.HibernateUtil;
+import com.mobile.model.LocationData;
+import com.mobile.model.MapData;
 
 /**
  * Servlet implementation class MapGps
@@ -50,6 +51,8 @@ public class MapGps extends HttpServlet {
 		MapData map = null; 
 		if(lData.size()>0)
 			map = new MapData(lData, request.getParameter("time")); 
+		HttpSession session = request.getSession(); 
+		session.setAttribute("map", map);
 		request.setAttribute("map", map);
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/gps/map.jsp"); 
 		rd.include(request, response);

@@ -1,4 +1,4 @@
-package com.mobile.jdbc;
+package com.mobile.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

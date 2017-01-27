@@ -10,7 +10,7 @@ public class TimeUtil {
 			return getToday();
 		case "yesterday":
 			return getYesterday();
-		case "seven":
+		case "seven_days":
 			return getSevenDay();
 		case "month":
 			return getLastMonth();

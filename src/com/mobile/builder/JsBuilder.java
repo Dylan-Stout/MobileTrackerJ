@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.mobile.action.GpsStore;
-import com.mobile.jdbc.LocationData;
+import com.mobile.model.LocationData;
 
 public class JsBuilder {
 	

@@ -22,6 +22,7 @@ import org.hibernate.query.Query;
 
 import com.mobile.jdbc.hibernate.HibernateUtil;
 import com.mobile.model.Gps;
+import com.mobile.model.LocationData;
 
 public class DbConnection {
 	
@@ -49,7 +50,12 @@ public class DbConnection {
 		List<LocationData> plots = new ArrayList(); 
 		Session session = HibernateUtil.getSession(); 
 		String[] timeParam = TimeUtil.getTimeParam(time);
-		Query query = session.createQuery("from Gps where id between :fromunix and :tounix");
+		Query query = null; 
+		if(timeParam[0] != null && timeParam[1] != null){ 
+			 query = session.createQuery("from Gps where id between :fromunix and :tounix");
+		}else{ 
+			 query = session.createQuery("from Gps where 1=1");
+		}
 		query.setParameter("fromunix", timeParam[0]);
 		query.setParameter("tounix", timeParam[1]); 
 		List<Gps> res = query.getResultList(); 
