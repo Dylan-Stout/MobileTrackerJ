@@ -81,7 +81,7 @@ public class BuildXml extends HttpServlet {
 		
 		//Marshal with proper namespace (not ns2 default) 
 		Marshaller marshaller = null; 
-		OutputStream outStream = response.getOutputStream();
+
 		try {
 			marshaller = JAXBContext.newInstance(new Class[]{Kml.class}).createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -117,6 +117,7 @@ public class BuildXml extends HttpServlet {
 	            response.setContentType("application/force-download");
 	            response.addHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
 			}
+			OutputStream outStream = response.getOutputStream();
 			//Set response type for xml 
 //			response.setContentType("text/xml");
 //			response.setCharacterEncoding("UTF-8");
