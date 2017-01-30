@@ -33,7 +33,7 @@ public class TimeUtil {
 			to = getYesterday()[0]; 
 			from = getYesterday()[1]; 
 			break;
-		case "seven":
+		case "seven_days":
 			to = getSevenDay()[0]; 
 			from = getSevenDay()[1]; 
 			break;
