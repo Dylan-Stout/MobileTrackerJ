@@ -49,15 +49,20 @@ public class DbConnection {
 	public List<LocationData> getLocationData(String time){ 
 		List<LocationData> plots = new ArrayList(); 
 		Session session = HibernateUtil.getSession(); 
-		String[] timeParam = TimeUtil.getTimeParam(time);
 		Query query = null; 
-		if(timeParam[0] != null && timeParam[1] != null){ 
-			 query = session.createQuery("from Gps where id between :fromunix and :tounix");
+		if(!time.equalsIgnoreCase("all")){
+			String[] timeParam = TimeUtil.getTimeParam(time);
+
+			if(timeParam[0] != null && timeParam[1] != null){ 
+				query = session.createQuery("from Gps where id between :fromunix and :tounix");
+			}else{ 
+				query = session.createQuery("from Gps where 1=1");
+			}
+			query.setParameter("fromunix", timeParam[0]);
+			query.setParameter("tounix", timeParam[1]); 
 		}else{ 
-			 query = session.createQuery("from Gps where 1=1");
+			query = session.createQuery("from Gps where 1=1"); 
 		}
-		query.setParameter("fromunix", timeParam[0]);
-		query.setParameter("tounix", timeParam[1]); 
 		List<Gps> res = query.getResultList(); 
 		for(Gps gpsEntry : res){ 
 			plots.add(new LocationData(gpsEntry.getId(),gpsEntry.getDate(),gpsEntry.getLongitude(),gpsEntry.getLatitude(),gpsEntry.getSpeed())); 
