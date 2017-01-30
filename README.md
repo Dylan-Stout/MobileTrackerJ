@@ -12,11 +12,28 @@ __OUTPUT:__
 
 Run this query against the 'location' database. NOTE: This is done manually for security reasons until a secure user generation algorithm can be implemented (0.8.1b). 
 
+### Setup Server
+3.) After creating create a war file from source with Maven. Make sure project is setup to use maven build. Build war file with *maven clean install* and deploy to a tomcat web servlet container (I.E. $CATALINA_HOME/webapps/\*.war). Ensure unpackwar=true in tomcat's  $CATALINA_HOME/conf/server.xml (this should be default). 
 
 
-Make sure project is setup to use maven build. Build war file with maven and deploy to tomcat web servlet container (I.E. $CATALINA_HOME/webapps/*.war). Ensure unpackwar=true in server.xml (this should be default). 
-Startup tomcat and navigate to the default context http://{hostname}:{8080}/MobileTracker to gain access Login Screen: 
+### Configure DB Connection
+
+4.) In the deployed .war file directory structure modify __$CATALINA_HOME/webapps/(web app name)/WEB-INF/classes/mobile_tracker.properties__ and supply the properties for db_url, db_user, db_pass, db_driver, and allowded_ip. This will allow the tomcat server to make JDBC connections to the MySql application database for read/write via hibernate ORM and it's connection pool. 
+
+*mobile_tracker.properties Example: *
+'''    
+    db_url=jdbc:mysql://localhost:3306/location
+    db_user=user1
+    db_pass=thisisthepassword
+    db_driver=com.mysql.jdbc.Driver
+    allowed_ip=96.86.193.49,71.219.38.228,127.0.0.1 
+'''
+
+
+
+
+Startup tomcat via $CATALINA_HOME/bin/startup.sh and navigate to the default context http://{hostname}:{8080}/MobileTracker to gain access Login Screen: 
 
 ![alt tag](http://i63.tinypic.com/2s6oqr4.jpg)
 
-
+__NOTE:__ *If an error with required libraries is logged in /var/log/tomcat
