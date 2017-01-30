@@ -20,22 +20,24 @@
 		<div data-role="main" class="ui-content">
 		<div data-role="content" id="content">
             	    <div id="floating-panel">
-      					<button onclick="toggleHeatmap()">Heatmap</button>
-      					<button onclick="togglePath()">Paths</button>
-      					<button onclick="togglePoints()">Points</button>
-      					<button onclick="toggleTimeline()">Timeline</button>
-      					<a data-role="button" href="#plotlistbar">List</a>
-      					<a data-role="button" href="${pageContext.request.contextPath}/gps/BuildXml">Export KML</a>
+      					<button data-mini="true" onclick="toggleHeatmap()">Heatmap</button>
+      					<button data-mini="true" onclick="togglePath()">Paths</button>
+      					<button data-mini="true" onclick="togglePoints()">Points</button>
+      					<a data-mini="true"  data-role="button" href="#plotlistbar">List</a>
+      					<a data-mini="true" data-role="button" href="${pageContext.request.contextPath}/gps/BuildXml" target="_blank">Export KML</a>
     				</div>
             	
                 <div id="canvas-map" style="height:100%"/>
-       </div>      
-            <div data-role="content" id="timelinebar"> 
-            
-            </div>
+       </div>
 		</div>
             
             <style>
+            	.ui-btn{
+            		margin: 0 !important;
+            	}
+            	.ui-btn-corner-all{
+            		border-radius: 0 !important; 
+            	}
                 #content {
                     padding: 0 !important; 
                     position : absolute !important; 
@@ -94,9 +96,6 @@
                }
                function togglePoints(){ 
             	   ${map.jsPointHide}
-               }
-               function toggleTimeline(){ 
-            	   $("#timelinebar").slideToggle(); 
                }
                function toggleList(){ 
             	   $("#plotlistbar").slideToggle();

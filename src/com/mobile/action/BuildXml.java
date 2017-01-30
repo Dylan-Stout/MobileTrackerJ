@@ -118,10 +118,6 @@ public class BuildXml extends HttpServlet {
 	            response.addHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
 			}
 			OutputStream outStream = response.getOutputStream();
-			//Set response type for xml 
-//			response.setContentType("text/xml");
-//			response.setCharacterEncoding("UTF-8");
-//			response.setHeader("Content-Disposition", "attachment;filename=" + ldata.get(0).hrDate.substring(0, 9).replace(" ", "_") + "_mapExport.xml");
 			marshaller.marshal(kml, outStream);
 		} catch (PropertyException e) {
 			// TODO Auto-generated catch block
