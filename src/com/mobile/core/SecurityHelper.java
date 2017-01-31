@@ -1,6 +1,7 @@
 package com.mobile.core;
 
 
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -216,6 +217,23 @@ public class SecurityHelper
     private static String toBase64(byte[] array)
     {
         return DatatypeConverter.printBase64Binary(array);
+    }
+    
+
+    public static void main(String[] args) throws NoSuchFieldException, NoSuchAlgorithmException, UnsupportedEncodingException, CannotPerformOperationException{ 
+    	if(args[0] == null || args[1] == null){ 
+    		throw new NoSuchFieldException("Username"); 
+    	}
+    	String username = (String)args[0]; 
+    	String password = (String)args[1]; 
+    	String userHash = null; 
+    	if(password!=null){ 
+    		userHash = createHash(password); 
+    	}
+    	StringBuilder sb = new StringBuilder(); 
+    	sb.append("INSERT INTO USER(USERNAME, USERIP, USERHASH) VALUES ('" + username + "', '0.0.0.0', '"  + userHash + "');");
+    	
+    	System.out.println("Generated query: " + sb.toString());
     }
 
 }

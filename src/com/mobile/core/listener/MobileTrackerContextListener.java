@@ -39,12 +39,12 @@ public class MobileTrackerContextListener implements ServletContextListener{
 				arg0.getServletContext().setAttribute("prop", properties);
 				Properties checkProp = (Properties) arg0.getServletContext().getAttribute("prop");
 				Enumeration keys = checkProp.keys();
-				logger.debug("*** PROPERTIES*** ");
-				while (keys.hasMoreElements()) {
-				    String key = (String)keys.nextElement();
-				    String value = (String)checkProp.get(key);
-				    logger.debug(key + " == " + value);
-				}
+//				logger.debug("*** PROPERTIES*** ");
+//				while (keys.hasMoreElements()) {
+//				    String key = (String)keys.nextElement();
+//				    String value = (String)checkProp.get(key);
+//				    logger.debug(key + " == " + value);
+//				}
 			} catch (IOException e) {
 				logger.error("Unable to read properties file");
 				e.printStackTrace();

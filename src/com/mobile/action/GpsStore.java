@@ -86,7 +86,7 @@ public class GpsStore extends HttpServlet {
 				logger.debug("[INCOMING] OK - ** Coordinate pair data recieved  **");
 			}
 			tx.commit();
-			logger.debug("Peristed " + numMessages + " entries. Closing session.");
+			logger.debug("Peristed " + numMessages + " entries. ");
 		}catch(Exception e){ 
 			e.printStackTrace();
 			if(tx != null)
