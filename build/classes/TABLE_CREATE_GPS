@@ -1,0 +1,8 @@
+CREATE TABLE `gps` (
+  `id` bigint(8) NOT NULL,
+  `date` varchar(65) NOT NULL,
+  `latitude` varchar(45) NOT NULL,
+  `longitude` varchar(45) NOT NULL,
+  `speed` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+);
