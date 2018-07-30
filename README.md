@@ -1,5 +1,6 @@
 # MobileTrackerJ
-Java web application for storing and displaying GPS coordinates. Location data is sent via POST by Palantir GPS mobile application. Uses Google Maps javascript API so an API key is needed to operate. 
+Java web application for storing and displaying GPS coordinates. Location data is sent via POST by Palantir GPS mobile application. Uses Google Maps javascript API so an API key is needed to operate.  
+
 # Setup
 ### Create Databases
 1.) Setup and create MySql Database named 'location' from SQL scripts in /res/ folder to be used by web application. This will be used for user login and data. 
