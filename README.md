@@ -6,10 +6,12 @@ Java web application for storing and displaying GPS coordinates. Location data i
 1.) Setup and create MySql Database named 'location' from SQL scripts in /res/ folder to be used by web application. This will be used for user login and data. 
 
 ### Create Users
-2.) Manually create user hash by running main method in com.mobile.core.SecurtyHelper generate a user's insert statement by passing two arguments [username] and [password]. Example: java com.mobile.core.SecurityHelper user1 password1
+2.) Since security is important use security helper to generate a single user hash with using two arguments [username] and [password]. It is recommended to have passwords be complex alphanumeric with symbols and whitespace Example:
+
+> java com.mobile.core.SecurityHelper 'username' 'zs!f0dos9fa<*s++dwk3fnsep sdfasd(sdfqsd>>'
 
 __OUTPUT:__
-> Generated query: INSERT INTO USER(USERNAME, USERIP, USERHASH) VALUES ('user1', '0.0.0.0', 'sha1:64000:18:BYGHYPBLoxgYO0xkG/bM9ajv6OesWvaa:ppEl8AvFHvfwZWZro4hMsnYA');
+> Generated query: INSERT INTO USER(USERNAME, USERIP, USERHASH) VALUES ('username', '0.0.0.0', 'sha1:64000:18:BYGHYPBLoxgYO0xkG/bM9ajv6OesWvaa:ppEl8AvFHvfwZWZro4hMsnYA');
 
 Run this query against the 'location' database. NOTE: This is done manually for security reasons until a secure user generation algorithm can be implemented (0.8.1b). Take note of this username and password as it will be used to login to the application. 
 
